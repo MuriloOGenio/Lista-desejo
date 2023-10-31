@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
         List<Desejo> desejoList;
 
         public HeroAdapter(List<Desejo> desejoList) {
-            super(MainActivity.this, R.layout.layout_hero_list, desejoList);
+            super(MainActivity.this, R.layout.layout_desejo_list, desejoList);
             this.desejoList = desejoList;
         }
 
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = getLayoutInflater();
-            View listViewItem = inflater.inflate(R.layout.layout_hero_list, null, true);
+            View listViewItem = inflater.inflate(R.layout.layout_desejo_list, null, true);
 
             TextView textViewName = listViewItem.findViewById(R.id.textViewName);
 
