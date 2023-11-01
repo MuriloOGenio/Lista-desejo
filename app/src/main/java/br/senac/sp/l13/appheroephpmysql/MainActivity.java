@@ -81,11 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void createHero() {
         String name = editTextName.getText().toString().trim();
-        String realname = editTextRealname.getText().toString().trim();
-
-        int rating = (int) ratingBar.getRating();
-
-        String team = spinnerTeam.getSelectedItem().toString();
+        String desejo = editTextDesejo.getText().toString().trim();
+        String prioridade = spinnerPrioridade.getSelectedItem().toString();
 
         if (TextUtils.isEmpty(name)) {
             editTextName.setError("Por favor entre com o nome");
@@ -93,18 +90,17 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (TextUtils.isEmpty(realname)) {
-            editTextRealname.setError("Por favor entre com o nome real");
-            editTextRealname.requestFocus();
+        if (TextUtils.isEmpty(desejo)) {
+            editTextDesejo.setError("Por favor entre com o nome real");
+            editTextDesejo.requestFocus();
             return;
         }
 
         //Conexão entre o Android e o PHP através do Hash.
         HashMap<String, String> params = new HashMap<>();
         params.put("name", name);
-        params.put("realname", realname);
-        params.put("rating", String.valueOf(rating));
-        params.put("teamaffiliation", team);
+        params.put("desejo", desejo);
+        params.put("prioridade", prioridade);
 
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_HERO, params, CODE_POST_REQUEST);
         request.execute();
@@ -118,11 +114,8 @@ public class MainActivity extends AppCompatActivity {
     private void updateHero() {
         String id = editTextHeroId.getText().toString();
         String name = editTextName.getText().toString().trim();
-        String realname = editTextRealname.getText().toString().trim();
-
-        int rating = (int) ratingBar.getRating();
-
-        String team = spinnerTeam.getSelectedItem().toString();
+        String desejo = editTextDesejo.getText().toString().trim();
+        String prioridade = spinnerPrioridade.getSelectedItem().toString();
 
 
         if (TextUtils.isEmpty(name)) {
@@ -131,18 +124,17 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (TextUtils.isEmpty(realname)) {
-            editTextRealname.setError("Por favor entre com o nome real");
-            editTextRealname.requestFocus();
+        if (TextUtils.isEmpty(desejo)) {
+            editTextDesejo.setError("Por favor entre com o nome real");
+            editTextDesejo.requestFocus();
             return;
         }
 
         HashMap<String, String> params = new HashMap<>();
         params.put("id", id);
         params.put("name", name);
-        params.put("realname", realname);
-        params.put("rating", String.valueOf(rating));
-        params.put("teamaffiliation", team);
+        params.put("desejo", desejo);
+        params.put("prioridade", prioridade);
 
 
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_UPDATE_HERO, params, CODE_POST_REQUEST);
@@ -151,9 +143,8 @@ public class MainActivity extends AppCompatActivity {
         buttonAddUpdate.setText("Adicionar");
 
         editTextName.setText("");
-        editTextRealname.setText("");
-        ratingBar.setRating(0);
-        spinnerTeam.setSelection(0);
+        editTextDesejo.setText("");
+        spinnerPrioridade.setSelection(0);
 
         isUpdating = false;
     }
@@ -172,13 +163,12 @@ public class MainActivity extends AppCompatActivity {
             heroList.add(new Desejo(
                     obj.getInt("id"),
                     obj.getString("name"),
-                    obj.getString("realname"),
-                    obj.getInt("rating"),
-                    obj.getString("teamaffiliation")
+                    obj.getString("desejo"),
+                    obj.getString("prioridade")
             ));
         }
 
-        HeroAdapter adapter = new HeroAdapter(heroList);
+        DesejoAdapter adapter = new DesejoAdapter(heroList);
         listView.setAdapter(adapter);
     }
 
@@ -207,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject object = new JSONObject(s);
                 if (!object.getBoolean("error")) {
                     Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
-                    refreshHeroList(object.getJSONArray("heroes"));
+                    refreshHeroList(object.getJSONArray("desejos"));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -229,10 +219,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class HeroAdapter extends ArrayAdapter<Desejo> {
+    class DesejoAdapter extends ArrayAdapter<Desejo> {
         List<Desejo> desejoList;
 
-        public HeroAdapter(List<Desejo> desejoList) {
+        public DesejoAdapter(List<Desejo> desejoList) {
             super(MainActivity.this, R.layout.layout_desejo_list, desejoList);
             this.desejoList = desejoList;
         }
@@ -258,9 +248,8 @@ public class MainActivity extends AppCompatActivity {
                     isUpdating = true;
                     editTextHeroId.setText(String.valueOf(desejo.getId()));
                     editTextName.setText(desejo.getName());
-                    editTextRealname.setText(desejo.getRealname());
-                    ratingBar.setRating(desejo.getRating());
-                    spinnerTeam.setSelection(((ArrayAdapter<String>) spinnerTeam.getAdapter()).getPosition(desejo.getTeamaffiliation()));
+                    editTextDesejo.setText(desejo.getDesejo());
+                    spinnerPrioridade.setSelection(((ArrayAdapter<String>) spinnerPrioridade.getAdapter()).getPosition(desejo.getPrioridade()));
                     buttonAddUpdate.setText("Alterar");
                 }
             });

@@ -7,7 +7,7 @@ public class Desejo {
     public Desejo() {
     }
 
-    public Desejo(int id, String name, String realname, int rating, String teamaffiliation) {
+    public Desejo(int id, String name, String desejo, String prioridade) {
         this.id = id;
         this.name = name;
         this.desejo = desejo;
@@ -43,7 +43,7 @@ public class Desejo {
         return prioridade;
     }
 
-    public void setTeamaffiliation(String teamaffiliation) {
+    public void setPrioridade(String prioridade) {
         this.prioridade = prioridade;
     }
 }
