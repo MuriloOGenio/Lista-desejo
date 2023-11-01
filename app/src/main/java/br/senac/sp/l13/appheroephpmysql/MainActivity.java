@@ -102,12 +102,12 @@ public class MainActivity extends AppCompatActivity {
         params.put("desejo", desejo);
         params.put("prioridade", prioridade);
 
-        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_HERO, params, CODE_POST_REQUEST);
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_DESEJO, params, CODE_POST_REQUEST);
         request.execute();
     }
 
     private void readHeroes() {
-        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_READ_HEROES, null, CODE_GET_REQUEST);
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_READ_DESEJOS, null, CODE_GET_REQUEST);
         request.execute();
     }
 
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(desejo)) {
-            editTextDesejo.setError("Por favor entre com o nome real");
+            editTextDesejo.setError("Descreva seu Desejo");
             editTextDesejo.requestFocus();
             return;
         }
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         params.put("prioridade", prioridade);
 
 
-        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_UPDATE_HERO, params, CODE_POST_REQUEST);
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_UPDATE_DESEJO, params, CODE_POST_REQUEST);
         request.execute();
 
         buttonAddUpdate.setText("Adicionar");
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deleteHero(int id) {
-        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_DELETE_HERO + id, null, CODE_GET_REQUEST);
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_DELETE_DESEJO + id, null, CODE_GET_REQUEST);
         request.execute();
     }
 

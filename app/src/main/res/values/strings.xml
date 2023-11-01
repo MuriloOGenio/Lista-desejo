@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">AppHeroePHPMySQL</string>
+    <string name="app_name">ListaDesejos</string>
 
     <array name="teams">
-        <item>Avengers</item>
-        <item>X-Men</item>
-        <item>Justice League</item>
-        <item>DC</item>
+        <item>Alta</item>
+        <item>Média</item>
+        <item>Baixa</item>
+
     </array>
 </resources>
